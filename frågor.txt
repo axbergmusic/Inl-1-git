@@ -60,3 +60,18 @@ Git revert ångrar en commit genom att skapa en ny commit av versionen innan. De
 $ git revert d4f3a1c
 [main 3a2e1b5] Revert "Adding Main class"
  1 file changed, 1 deletion(-)
+
+--------------------------------------------------------------------------------------------------------------
+
+Beskriv och jämför hur man kan använda git rebase och git merge i ett scenario där flera utvecklare jobbar på olika 
+feature branches. Diskutera fördelarna och nackdelarna med båda teknikerna, samt hur de påverkar historiken.
+
+Svar:
+Med git merge kan utvecklare jobba på olika feature branches parallellt och slå ihop dem med git merge till main. 
+Om samma rader ändrats kan konflikter uppstå. Historiken visar tydligt att feature branches utvecklades parallellt 
+och slogs ihop via en merge commit, vilket bevarar informationen för det parallella arbetet.
+
+Git rebase gör att utvecklare kan flytta sina commits ovanpå den senaste versionen av main. Detta gör att historiken är 
+linjär och utan merge commits. Det gör att det blir lättare att följa. Om en utvecklare pushar en feature branch som har 
+använt git rebase till ett remote repository kan det skapa problem eftersom det ändrar commit-historiken, speciellt ifall 
+andra utvecklare jobbar på en tidigare version av main med gamla commits eller gammal commit historik.
