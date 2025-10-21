@@ -1,0 +1,62 @@
+Jag siktar på VG.
+
+Vad är pull repektive push?
+
+Svar:
+Pull är att hämta data från ett remote repository till sitt lokala repository. Pull är en kombination mellan
+git fetch och git merge, som med andra ord hämtar nya commits (fetch) och slår ihop dom med din nuvarande
+branch (merge).
+
+Push skickar ändringar från ett lokalt repository till ett remote repository online.
+
+--------------------------------------------------------------------------------------------------------------
+
+När använder man log respektive status?
+
+Svar:
+Git log visar en historik av alla commits som är gjorda på den branchen man står på i ett repository. 
+Det visar info som vem som gjort commitsen, när och meddelanden. Log används för att se historiken om man 
+tex behöver hitta en tidigare commit, för att se om dina commits blev utförda, etc.
+
+Git status visar vad man kan säga är "nuvarande status" i ett repository. Det används för att se filer som är tillagda 
+i staging (git add), vilka filer som är ändrade men inte tillagda i staging, vilka som är redo för commit, etc.
+
+--------------------------------------------------------------------------------------------------------------
+
+Vad är en Git branch och varför är de viktiga?
+
+Svar:
+En Git branch kan förklaras som en parallell version av koden i main/master där man kan göra ändringar utan att
+påverka huvudkoden. Branches är viktiga för att kunna jobba på olika saker, skydda huvudkoden och underlätta samarbete. 
+
+--------------------------------------------------------------------------------------------------------------
+
+Det finns flera sätt att rulla tillbaka koden till ett tidigare tillstånd. Förklara skillnaden och motivera 
+när man skulle använda den ena eller andra metoden. Ge exempel på de kommandon du använder för att göra detta
+och vissa att det fungerar, vilken output du fick från git-kommandona.
+Tips: Gör exemplen med att backa i en branch så att master fortfarande är korrekt. 
+
+Svar:
+Git restore kan användas för filer i staging som du vill ändra eller ta bort innan dom commitas. T.e.x om du har
+gjort git add GuessingGame.java, så ligger den i staging, men den är ej commitad ännu. Om du gör
+git ignore GuessingGame.java tas den bort från staging och kan ej commitas längre.
+
+$ git restore GuessingGame.java
+$ git status
+On branch test-branch
+nothing to commit, working tree clean
+
+Git reset flyttar head till önskad plats genom att ange commit-id. Det finns 3 typer av reset: soft, mixed och hard.
+soft flyttar head, men lämnar staging area oändrat, och ingenting förändras i arbetskatalogen,
+mixed flyttar head, och staging area rensas, samt arbetskatalogen behåller ändringarna,
+hard flyttar head, staging area rensas, och ändringarna i arbetskatalogen försvinner också.	
+
+$ git reset --hard b6a9f41
+HEAD is now at b6a9f41 Adding constructor to Guesser.java
+
+Git revert ångrar en commit genom att skapa en ny commit av versionen innan. Det kan vara bra att använda när man
+ångrar något men vill bevara historiken. Oftast används det för commits som redan är pushade.
+
+$ git revert d4f3a1c
+[main 3a2e1b5] Revert "Adding Main class"
+ 1 file changed, 1 deletion(-)
